@@ -35,6 +35,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: .
+        file: /home/mihdev/test-pr/Dockerfile 
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
 
