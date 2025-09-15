@@ -54,8 +54,8 @@ jobs:
         
     - name: Add server to known hosts
       run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan -p 22 ${{ secrets.LOCAL_HOST }} >> ~/.ssh/known_hosts
+        mkdir -p /home/runner/.ssh
+        ssh-keyscan -p 22 ${{ secrets.LOCAL_HOST }} >> /home/runner/.ssh/known_hosts
         
     - name: Deploy to local machine
       run: |
