@@ -52,17 +52,17 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.LOCAL_SSH_KEY }}
         
-- name: Add server to known hosts
-  run: |
-    mkdir -p ~/.ssh
-    ssh-keyscan -H ${{ secrets.LOCAL_HOST }} >> ~/.ssh/known_hosts
-
-- name: Deploy to local machine
-  run: |
-    ssh -o StrictHostKeyChecking=no ${{ secrets.LOCAL_USERNAME }}@${{ secrets.LOCAL_HOST }} "
-      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
-      docker stop intens-container || true
-      docker rm intens-container || true
-      docker run -d -p 8080:8080 --name intens-container ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
-      echo 'Deployment completed successfully!'
-    "
+    - name: Add server to known hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -H ${{ secrets.LOCAL_HOST }} >> ~/.ssh/known_hosts
+        
+    - name: Deploy to local machine
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.LOCAL_USERNAME }}@${{ secrets.LOCAL_HOST }} "
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
+          docker stop intens-container || true
+          docker rm intens-container || true
+          docker run -d -p 8080:8080 --name intens-container ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
+          echo 'Deployment completed successfully!'
+        "
