@@ -54,10 +54,10 @@ jobs:
         
     - name: Deploy to local machine
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.LOCAL_USERNAME }}@${{ secrets.LOCAL_HOST }} "
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
-          docker stop intens-container || true
-          docker rm intens-container || true
-          docker run -d -p 8080:8080 --name intens-container ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
-          echo 'Deployment completed successfully!'
-        "
+    ssh -o StrictHostKeyChecking=no ${{ secrets.LOCAL_USERNAME }}@${{ secrets.LOCAL_HOST }} "
+      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
+      docker stop intens-container || true
+      docker rm intens-container || true
+      docker run -d -p 8080:8080 --name intens-container ${{ secrets.DOCKERHUB_USERNAME }}/intens-api:latest
+      echo 'Deployment completed successfully!'
+    "
